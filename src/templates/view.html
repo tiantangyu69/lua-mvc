@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>{{message}}</h1>
+    <ul>
+        {% for _, user in ipairs(users) do %}
+        {(user.html, user)}
+        {% end %}
+    </ul>
+</body>
+</html>
