@@ -11,11 +11,11 @@ local application = {}
 
 -- 添加 GET 请求映射
 local function initRequestMapping()
-    requestMapping.addGetMapping('/testlua2', 'getOneComment2', 'api.CommentAPI')
-    requestMapping.addGetMapping('/testlua', 'getOneComment', 'api.CommentAPI')
-    requestMapping.addGetMapping('/testlua/docId/{docId}/comments/{commentId}', 'getOneComment3', 'api.CommentAPI')
-    requestMapping.addGetMapping('/testlua3', 'renderLayout', 'api.CommentAPI')
-    requestMapping.addGetMapping('/testlua4', 'redirect', 'api.CommentAPI')
+    requestMapping.addGetMapping('/testRenderHtml', 'renderHtml', 'api.TestAPI')
+    requestMapping.addGetMapping('/testReturnJson', 'jsonResult', 'api.TestAPI')
+    requestMapping.addGetMapping('/testRestfulApi/param1/{param1}/param2/{param2}', 'restfulApi', 'api.TestAPI')
+    requestMapping.addGetMapping('/testRenderLayout', 'renderLayout', 'api.TestAPI')
+    requestMapping.addGetMapping('/testRedirect', 'redirect', 'api.TestAPI')
 end
 
 initRequestMapping()

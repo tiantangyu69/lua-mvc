@@ -7,9 +7,10 @@
 --
 local HttpStatus = require('webframe.http.HttpStatus')
 
-local commentAPI = {}
+local testAPI = {}
 
-function commentAPI.getOneComment(request, response)
+-- 测试模板渲染
+function testAPI.renderHtml(request, response)
     local data = {}
     data.message = 'hello, world! -- 你好，世界！'
     data.users = {
@@ -20,27 +21,31 @@ function commentAPI.getOneComment(request, response)
     response:render('view.html', data)
 end
 
-function commentAPI.getOneComment2(request, response)
+-- 测试返回 json
+function testAPI.jsonResult(request, response)
     response:writeJson({ ['username'] = '张三', ['sex'] = '男' })
 end
 
-function commentAPI.getOneComment3(request, response)
-    local docId = request:getParameter('docId')
-    local commentId = request:getParameter('commentId')
-    local aaa = request:getParameter('aaa')
-    local bbb = request:getParameter('bbb')
+-- 测试 restful api
+function testAPI.restfulApi(request, response)
+    local param1 = request:getParameter('param1')
+    local param2 = request:getParameter('param2')
+    local p1 = request:getParameter('p1')
+    local p2 = request:getParameter('p2')
 
-    response:writeTxt("docId: ", tostring(docId), '; commentId: ', tostring(commentId), '; aaa: ', aaa, '; bbb: ', bbb, '<br>')
+    response:writeTxt("param1: ", tostring(param1), '; param2: ', tostring(param2), '; p1: ', p1, '; p2: ', p2)
 end
 
-function commentAPI.renderLayout(request, response)
+-- 测试基于 layout 的 html 渲染
+function testAPI.renderLayout(request, response)
     local data = {}
     data.message = 'hello, world! -- 你好，世界！'
     response:renderWithLayout('viewWithLayout.html', 'layout.html', data, 'layout 测试')
 end
 
-function commentAPI.redirect(request, response)
+-- 测试重定向
+function testAPI.redirect(request, response)
     response:sendRedirect('http://www.163.com')
 end
 
-return commentAPI
+return testAPI
