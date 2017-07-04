@@ -5,17 +5,15 @@
 -- Time: 下午8:10
 -- To change this template use File | Settings | File Templates.
 --
-mt = {}
+local mt = {}
+-- default has not metatable
 print('mt metatable: ' .. tostring(getmetatable(mt)))
 
-t = { ['a'] = true, ['b'] = 'aaaa' }
-
+local t = { ['a'] = true }
 setmetatable(mt, { __index = t })
-print('mt metatable: ' .. tostring(getmetatable(mt)))
+print('set mt metatable t, mt metatable: ' .. tostring(getmetatable(mt)))
 
+--mt.__index = t
 
-print(t.a)
-print(mt.b)
-
-print('10' + '1')
-print('10' == 10)
+print('t.a:', t.a)
+print('mt.a:', mt.a)
