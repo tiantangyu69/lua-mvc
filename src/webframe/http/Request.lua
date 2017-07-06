@@ -76,11 +76,25 @@ function Request:getParameter(name)
 
         method = self:getMethod()
 
-        if method == 'POST' then
-            self._req.read_body()
-            return self._req.get_post_args()[name]
-        else
+        if method == 'GET' then
             return self._req.get_uri_args()[name]
+        else
+            self._req.read_body()
+            local value = self._req.get_post_args()[name]
+
+            if value then
+                return value
+            else
+                local file = ngx.req.get_body_file()
+                if file then
+                    local f = assert(io.open(file, 'r'))
+                    local str = f:read("*all")
+                    f:close()
+                    return str
+                else
+                    return nil
+                end
+            end
         end
     end
 end
